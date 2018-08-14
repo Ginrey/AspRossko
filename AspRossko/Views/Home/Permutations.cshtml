@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using AspRossko.Models
+@model IEnumerable<RequestModel>
+
+<div align="center">
+    <h1>Results</h1>
+    <div align="center">
+        <p>
+            @Html.ActionLink("Download Json file", "Download", "Home", new {filename = "JsonResult.json"})
+        </p>
+    </div>
+
+    <table id="tableResults" width="600" class="table" align="center">
+        <tr>
+            <th>Input</th>
+            <th>Output</th>
+        </tr>
+        @foreach (RequestModel request in Model)
+        {
+        <tr>
+            <td>@request.InputData</td>
+            <td>
+                @request.OutputData.OutList.Count (@string.Join(", ", request.OutputData.OutList)) <br /> <br />
+                @request.OutputData.Time.TotalMilliseconds.ToString("0.###") ms
+            </td>
+        </tr>
+        }
+    </table>
+</div>
